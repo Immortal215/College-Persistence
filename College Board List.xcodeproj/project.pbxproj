@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AF9512B2C7E1BBA008369DE /* CollegeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF9512A2C7E1BBA008369DE /* CollegeList.swift */; };
 		B818CD012C7E187200D0FA21 /* College_Board_ListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818CD002C7E187200D0FA21 /* College_Board_ListApp.swift */; };
 		B818CD032C7E187200D0FA21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818CD022C7E187200D0FA21 /* ContentView.swift */; };
 		B818CD072C7E187300D0FA21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B818CD062C7E187300D0FA21 /* Assets.xcassets */; };
 		B818CD0A2C7E187300D0FA21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B818CD092C7E187300D0FA21 /* Preview Assets.xcassets */; };
+		B818CD112C7E1B5B00D0FA21 /* To-Do.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818CD102C7E1B5B00D0FA21 /* To-Do.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5AF9512A2C7E1BBA008369DE /* CollegeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeList.swift; sourceTree = "<group>"; };
 		B818CCFD2C7E187200D0FA21 /* College Board List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "College Board List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B818CD002C7E187200D0FA21 /* College_Board_ListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = College_Board_ListApp.swift; sourceTree = "<group>"; };
 		B818CD022C7E187200D0FA21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B818CD062C7E187300D0FA21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B818CD092C7E187300D0FA21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B818CD102C7E1B5B00D0FA21 /* To-Do.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "To-Do.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,10 @@
 		B818CCFF2C7E187200D0FA21 /* College Board List */ = {
 			isa = PBXGroup;
 			children = (
+				5AF9512A2C7E1BBA008369DE /* CollegeList.swift */,
 				B818CD002C7E187200D0FA21 /* College_Board_ListApp.swift */,
 				B818CD022C7E187200D0FA21 /* ContentView.swift */,
+				B818CD102C7E1B5B00D0FA21 /* To-Do.swift */,
 				B818CD062C7E187300D0FA21 /* Assets.xcassets */,
 				B818CD082C7E187300D0FA21 /* Preview Content */,
 			);
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AF9512B2C7E1BBA008369DE /* CollegeList.swift in Sources */,
 				B818CD032C7E187200D0FA21 /* ContentView.swift in Sources */,
+				B818CD112C7E1B5B00D0FA21 /* To-Do.swift in Sources */,
 				B818CD012C7E187200D0FA21 /* College_Board_ListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
