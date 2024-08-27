@@ -1,61 +1,75 @@
-//
-//  ContentView.swift
-//  College Board List
-//
-//  Created by Sharul M. Shah on 8/27/24.
-//
-
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    
+    // way to get swiftdata
+    @Environment(\.modelContext) var context
+    @Query var people:[Person]
+    
+//    @State var count = UserDefaults.standard.integer(forKey: "count")
+//    @AppStorage("shower") var shower = false
+    
+//    @State var friends: [String] = []
+    @State var newName = ""
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+//        VStack {
+//            Button("\(count)") {
+//                count += 1
+//                UserDefaults.standard.set(count, forKey: "count")
+//            }
+//            .font(.largeTitle)
+//            Text(shower ? "hello" : "")
+//            Button ("Show Hello World"){
+//                shower.toggle()
+//            }
+//            Toggle("Show Hello World", isOn: $shower)
+//        }
+//        .padding()
+        HStack {
+            TextField("Enter a name", text: $newName)
+//                friends.append(newName)
+//                newName = ""
+//                UserDefaults.standard.set(friends, forKey: "friends")
+//            }
+            .textFieldStyle(.roundedBorder)
+            .padding()
+            Button("+") {
+                if newName.replacingOccurrences(of: " ", with: "") != "" {
+                    let person = Person(name: newName)
+                    context.insert(person)
+                    newName = ""
                 }
-                .onDelete(perform: deleteItems)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+            .font(.largeTitle)
+            .padding()
         }
-    }
+        .padding()
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+        List {
+            ForEach(people) { currentPerson in
+                Text(currentPerson.name)
             }
         }
+//        List(friends, id:\.self) { name in
+//           Text(name)
+//        }
+//        .onAppear {
+//            if let retrieved = UserDefaults.standard.stringArray(forKey: "friends") {
+//             friends = retrieved
+//            }
+//        }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+@Model
+class Person {
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
 }
+
+
