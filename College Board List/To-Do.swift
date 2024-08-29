@@ -7,10 +7,17 @@ struct To_Do: View {
     @State var newName = ""
     var body: some View {
         VStack {
-            HStack {
+            VStack {
+                Text("To Do List")
+                    .font(.custom("AmericanTypewriter", size:35))
+                    .padding()
+            }
+            HStack{
                 TextField("Enter a name", text: $newName)
                     .textFieldStyle(.roundedBorder)
+                    .font(.custom("AmericanTypewriter", size:20))
                     .padding()
+                
                 Button("+") {
                     if newName.replacingOccurrences(of: " ", with: "") != "" {
                         let person = Person(name: newName, college: "")
@@ -27,6 +34,7 @@ struct To_Do: View {
                 ForEach(people) { currentPerson in
                     if currentPerson.name != "" {
                         Text(currentPerson.name)
+                            .font(.custom("AmericanTypewriter", size:20))
                     }
                 }
             }
