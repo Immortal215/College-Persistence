@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State var selectedTab = 0
+    @AppStorage("selectedTab") var selectedTab = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -25,9 +25,11 @@ struct ContentView: View {
 @Model
 class Person {
     var name: String
+    var college: String
     
-    init(name: String) {
+    init(name: String, college: String) {
         self.name = name
+        self.college = college
     }
 }
 

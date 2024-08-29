@@ -13,7 +13,7 @@ struct To_Do: View {
                     .padding()
                 Button("+") {
                     if newName.replacingOccurrences(of: " ", with: "") != "" {
-                        let person = Person(name: newName)
+                        let person = Person(name: newName, college: "")
                         context.insert(person)
                         newName = ""
                     }
@@ -25,7 +25,9 @@ struct To_Do: View {
             
             List {
                 ForEach(people) { currentPerson in
-                    Text(currentPerson.name)
+                    if currentPerson.name != "" {
+                        Text(currentPerson.name)
+                    }
                 }
             }
         }
