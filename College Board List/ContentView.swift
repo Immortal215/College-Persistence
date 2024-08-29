@@ -2,34 +2,23 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    
-    // way to get swiftdata
-    @Environment(\.modelContext) var context
-    @Query var people:[Person]
-    @State var newName = ""
+    @State var selectedTab = 0
     
     var body: some View {
-        HStack {
-            TextField("Enter a name", text: $newName)
-            .textFieldStyle(.roundedBorder)
-            .padding()
-            Button("+") {
-                if newName.replacingOccurrences(of: " ", with: "") != "" {
-                    let person = Person(name: newName)
-                    context.insert(person)
-                    newName = ""
+        TabView(selection: $selectedTab) {
+            To_Do()
+                .tabItem {
+                    Label("To Do", systemImage: "pencil")
                 }
-            }
-            .font(.largeTitle)
-            .padding()
+                .tag(0)
+            
+            CollegeList()
+                .tabItem {
+                    Label("College", systemImage: "text.book.closed.fill")
+                }
+                .tag(1)
         }
-        .padding()
-
-        List {
-            ForEach(people) { currentPerson in
-                Text(currentPerson.name)
-            }
-        }
+        .tabViewStyle(.automatic)
     }
 }
 
