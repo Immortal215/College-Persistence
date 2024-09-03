@@ -14,9 +14,8 @@ struct To_Do: View {
             }
             HStack {
                 
-                TextField("Enter a name", text: $newName)
+                TextField("Enter an objective", text: $newName)
                     .textFieldStyle(.roundedBorder)
-                    .font(.custom("AmericanTypewriter", size:20))
                     .padding()
                 
                 Button("+") {
@@ -45,7 +44,6 @@ struct To_Do: View {
                                     .animation(.bouncy(duration: 1, extraBounce: 0.3))
                             }
                             Text(item.name)
-                                .font(.custom("AmericanTypewriter", size:20))
                         }
                     }
                 }
