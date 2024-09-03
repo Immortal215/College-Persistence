@@ -37,8 +37,12 @@ struct To_Do: View {
                         HStack {
                             Button {
                                 item.checked.toggle()
+                               Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
+                                   context.delete(item)
+                                }
                             } label: {
                                 Image(systemName: item.checked ? "checkmark.circle.fill" : "circle")
+                                    .animation(.bouncy(duration: 1, extraBounce: 0.3))
                             }
                             Text(item.name)
                                 .font(.custom("AmericanTypewriter", size:20))

@@ -15,7 +15,7 @@ struct CollegeList: View {
             
             HStack {
 
-                TextField("Enter a name", text: $newName)
+                TextField("Enter a College", text: $newName)
                     .textFieldStyle(.roundedBorder)
                     .padding()
                     .frame(maxWidth: screenWidth/1.2)
@@ -38,8 +38,12 @@ struct CollegeList: View {
                         HStack {
                             Button {
                                 college.checked.toggle()
+                               Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
+                                   context.delete(college)
+                                }
                             } label: {
                                 Image(systemName: college.checked ? "checkmark.circle.fill" : "circle")
+                                    .animation(.bouncy(duration: 1, extraBounce: 0.3))
                             }
                             Text(college.college)
                         }
