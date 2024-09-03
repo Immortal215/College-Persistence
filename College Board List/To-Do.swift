@@ -51,5 +51,7 @@ struct To_Do: View {
                 }
             }
         }
+        .font(.custom("AmericanTypewriter", size:20))
+        .animation(.smooth(duration: 1, extraBounce: 0.3))
     }
 }
