@@ -12,7 +12,8 @@ struct To_Do: View {
                     .font(.custom("AmericanTypewriter", size:35))
                     .padding()
             }
-            HStack{
+            HStack {
+                
                 TextField("Enter a name", text: $newName)
                     .textFieldStyle(.roundedBorder)
                     .font(.custom("AmericanTypewriter", size:20))
@@ -20,7 +21,7 @@ struct To_Do: View {
                 
                 Button("+") {
                     if newName.replacingOccurrences(of: " ", with: "") != "" {
-                        let person = Person(name: newName, college: "")
+                        let person = Person(name: newName, college: "", checked: false)
                         context.insert(person)
                         newName = ""
                     }
@@ -31,10 +32,17 @@ struct To_Do: View {
             .padding()
             
             List {
-                ForEach(people) { currentPerson in
-                    if currentPerson.name != "" {
-                        Text(currentPerson.name)
-                            .font(.custom("AmericanTypewriter", size:20))
+                ForEach(people) { item in
+                    if item.name != "" {
+                        HStack {
+                            Button {
+                                item.checked.toggle()
+                            } label: {
+                                Image(systemName: item.checked ? "checkmark.circle.fill" : "circle")
+                            }
+                            Text(item.name)
+                                .font(.custom("AmericanTypewriter", size:20))
+                        }
                     }
                 }
             }

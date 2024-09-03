@@ -26,10 +26,12 @@ struct ContentView: View {
 class Person {
     var name: String
     var college: String
+    var checked: Bool
     
-    init(name: String, college: String) {
+    init(name: String, college: String, checked: Bool) {
         self.name = name
         self.college = college
+        self.checked = checked
     }
 }
 
