@@ -8,6 +8,9 @@ struct CollegeList: View {
     
     var body: some View {
         VStack {
+            Text("Colleges!")
+                .padding()
+            
             HStack {
                 TextField("Enter a name", text: $newName)
                     .textFieldStyle(.roundedBorder)
@@ -34,5 +37,7 @@ struct CollegeList: View {
                 }
             }
         }
+        .font(.custom("AmericanTypewriter", size:35))
+
     }
 }
