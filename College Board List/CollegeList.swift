@@ -9,7 +9,7 @@ struct CollegeList: View {
     
     var body: some View {
         VStack {
-            Text("Colleges!")
+            Text("Colleges")
                 .padding()
                 .font(.custom("AmericanTypewriter", size:35))
             
@@ -38,12 +38,13 @@ struct CollegeList: View {
                         HStack {
                             Button {
                                 college.checked.toggle()
-                               Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
+                               
                                    context.delete(college)
-                                }
+                                
                             } label: {
-                                Image(systemName: college.checked ? "checkmark.circle.fill" : "circle")
+                                Image(systemName: "trash.fill")
                                     .animation(.bouncy(duration: 1, extraBounce: 0.3))
+                                    .foregroundStyle(.red)
                             }
                             Text(college.college)
                         }
