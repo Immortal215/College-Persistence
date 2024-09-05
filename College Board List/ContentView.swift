@@ -27,14 +27,12 @@ class Person {
     var name: String
     var college: String
     var checked: Bool
+    var workText: String
     
-    init(name: String, college: String, checked: Bool) {
+    init(name: String, college: String, checked: Bool, workText: String) {
         self.name = name
         self.college = college
         self.checked = checked
+        self.workText = workText
     }
-}
-
-#Preview {
-    ContentView()
 }
