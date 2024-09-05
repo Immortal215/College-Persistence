@@ -9,7 +9,7 @@ struct CollegeList: View {
 
     var body: some View {
         VStack {
-            Text("Colleges")
+            Text("College List")
                 .padding()
                 .font(.custom("AmericanTypewriter", size: 35))
 
