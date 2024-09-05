@@ -52,10 +52,9 @@ struct CollegeList: View {
 
     func addCollege() {
         if !newName.trimmingCharacters(in: .whitespaces).isEmpty {
-            let college = Person(name: "", college: newName, checked: false)
+            let college = Person(name: "", college: newName, checked: false, workText: "")
             context.insert(college)
             newName = ""
         }
     }
 }
-
