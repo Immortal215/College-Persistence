@@ -5,6 +5,10 @@ struct To_Do: View {
     @Environment(\.modelContext) var context
     @Query var people:[Person]
     @State var newName = ""
+    @State var clicked = false
+    @State var texter = ""
+    @State var screenWidth = UIScreen.main.bounds.width
+
     var body: some View {
         VStack {
             VStack {
@@ -15,12 +19,21 @@ struct To_Do: View {
             HStack {
                 
                 TextField("Enter an objective", text: $newName)
-                    .textFieldStyle(.roundedBorder)
-                    .padding()
+                    .onSubmit {
+                    if newName.replacingOccurrences(of: " ", with: "") != "" {
+                        let person = Person(name: newName, college: "", checked: false, workText: "Description")
+                        context.insert(person)
+                        newName = ""
+                    }
+                }
+                .textFieldStyle(.roundedBorder)
+                .padding()
+                
+                
                 
                 Button("+") {
                     if newName.replacingOccurrences(of: " ", with: "") != "" {
-                        let person = Person(name: newName, college: "", checked: false)
+                        let person = Person(name: newName, college: "", checked: false, workText: "Description")
                         context.insert(person)
                         newName = ""
                     }
@@ -30,26 +43,55 @@ struct To_Do: View {
             }
             .padding()
             
-            List {
+            ScrollView {
                 ForEach(people) { item in
-                    if item.name != "" {
-                        HStack {
-                            Button {
-                                item.checked.toggle()
-                               Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
-                                   context.delete(item)
+                        if item.name != "" {
+                            HStack {
+                                VStack {
+                                    Button {
+                                        item.checked.toggle()
+                                        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
+                                            if item.checked == true {
+                                                context.delete(item)
+                                            }
+                                        }
+                                    } label: {
+                                        Image(systemName: item.checked ? "checkmark.circle.fill" : "circle.dashed")
+                                        
+                                        
+                                    }
                                 }
-                            } label: {
-                                Image(systemName: item.checked ? "checkmark.circle.fill" : "circle")
-                                    .animation(.bouncy(duration: 1, extraBounce: 0.3))
+                                
+                                Text("\(item.name) - ")
+                                VStack {
+                                    Button {
+                                        item.checked = false
+                                        clicked.toggle()
+                                    } label : {
+                                        Text(item.workText)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    .sheet(isPresented: $clicked, content: {
+                                        TextField(item.workText != "Description" ? "Enter Description" : "\(item.workText)", text: $texter )
+                                            .onSubmit {
+                                                item.workText = texter
+                                                texter = ""
+                                                clicked.toggle()
+                                            }
+                                            .textFieldStyle(.roundedBorder)
+                                            .padding()
+                                        Spacer()
+                                    }) 
+                                }
                             }
-                            Text(item.name)
+                            .frame(width: screenWidth/1.2)
+                            .padding()
                         }
-                    }
+                    
                 }
             }
         }
         .font(.custom("AmericanTypewriter", size:20))
-        .animation(.smooth(duration: 1, extraBounce: 0.3))
+        .animation(.bouncy(duration: 1))
     }
 }
