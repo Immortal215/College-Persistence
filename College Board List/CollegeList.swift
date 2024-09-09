@@ -5,7 +5,6 @@ struct CollegeList: View {
     @Environment(\.modelContext) var context
     @Query var colleges: [Person]
     @State var newName = ""
-    @State var acceptanceRate = ""
 
     var body: some View {
         VStack {
@@ -18,13 +17,9 @@ struct CollegeList: View {
                     .textFieldStyle(.roundedBorder)
                     .padding()
 
-                TextField("Acceptance Rate", text: $acceptanceRate)
-                    .textFieldStyle(.roundedBorder)
-                    .padding()
-
+                
                 Button(action: addCollege) {
-                    Text("+")
-                        .font(.largeTitle)
+                    Image(systemName: "plus.viewfinder")
                         .padding()
                 }
             }
@@ -57,4 +52,5 @@ struct CollegeList: View {
             newName = ""
         }
     }
+    
 }
