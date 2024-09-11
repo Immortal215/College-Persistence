@@ -54,3 +54,4 @@ struct CollegeList: View {
     }
     
 }
+

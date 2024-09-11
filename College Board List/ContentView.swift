@@ -36,3 +36,9 @@ class Person {
         self.workText = workText
     }
 }
+
+#Preview {
+    ContentView()
+    .modelContainer(for: Person.self, inMemory: true)
+
+}

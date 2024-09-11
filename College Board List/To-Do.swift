@@ -45,52 +45,64 @@ struct To_Do: View {
             
             ScrollView {
                 ForEach(people) { item in
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(lineWidth: 2)
-                        if item.name != "" {
+                    var index = people.index(of: item)!
+                    
+                    if item.name != "" {
+                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(lineWidth: 3)
+                                .frame(width: item.checked ? 0 : screenWidth/1.2, height: 50, alignment: .center)
+                                .animation(.linear(duration: 1))
+                            
                             HStack {
                                 Button {
                                     item.checked.toggle()
-                                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
-                                        if item.checked == true {
-                                            context.delete(item)
-                                        }
-                                    }
+                                    context.delete(item)
+                                    
                                 } label: {
                                     Image(systemName: item.checked ? "checkmark.circle.fill" : "circle.dashed")
                                     
+                                }
+                                .padding()
+                                
+                                if item.checked != true {
+                                    HStack {
+                                        Text("\(item.name) ")
+                                        Spacer()
+                                        Button {
+                                            clicked.toggle()
+                                            
+                                        } label : {
+                                            Text(item.workText)
+                                                .foregroundStyle(.gray)
+                                        }
+                                        .sheet(isPresented: $clicked, content: {
+                                            TextField(item.workText == "Description" ? "Enter Description" : "\(item.workText)", text: $texter )
+                                                .onSubmit {
+                                                    item.workText = texter
+                                                    texter = ""
+                                                    clicked.toggle()
+                                                }
+                                                .textFieldStyle(.roundedBorder)
+                                                .padding()
+                                            Spacer()
+                                        })
+                                        .padding()
+                                    }
+                                    .animation(.easeInOut(duration: 1))
                                     
                                 }
                                 
-                                
-                                Text("\(item.name) ")
-                                Spacer()
-                                Button {
-                                    item.checked = false
-                                    clicked.toggle()
-                                } label : {
-                                    Text(item.workText)
-                                        .foregroundStyle(.gray)
-                                }
-                                .sheet(isPresented: $clicked, content: {
-                                    TextField(item.workText != "Description" ? "Enter Description" : "\(item.workText)", text: $texter )
-                                        .onSubmit {
-                                            item.workText = texter
-                                            texter = ""
-                                            clicked.toggle()
-                                        }
-                                        .textFieldStyle(.roundedBorder)
-                                        .padding()
-                                    Spacer()
-                                })
                             }
-                            
-                            .frame(width: screenWidth/1.2)
+                            .frame(width: item.checked ? 0 : screenWidth/1.2, height: 50)
+                            .animation(.linear(duration: 1))
                             .padding()
+                            
                         }
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
                     }
-                    .padding()
                 }
             }
         }
